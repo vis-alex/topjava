@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://topjava/util/functions" prefix="f" %>
 <html>
 <head>
     <title>Meals</title>
@@ -25,7 +26,7 @@
     </tr>
     <c:forEach items="${meals}" var="meal">
         <tr style="${meal.excess ? "color : red" : "color : green"}" >
-            <td>${meal.dateTime}</td>
+            <td> ${f:formatLocalDateTime(meal.dateTime, 'dd.MM.yyyy HH:mm:ss')}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
             <td><a href="">Update</a></td>
