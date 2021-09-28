@@ -16,6 +16,7 @@ public abstract class BaseMeal {
     private int calories;
 
     public BaseMeal(LocalDateTime dateTime, String description, int calories) {
+        MealsUtil.increment();
         this.id = MealsUtil.count;
         this.dateTime = dateTime;
         this.description = description;

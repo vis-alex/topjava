@@ -16,6 +16,11 @@
 <body>
 
 <h3><a href="index.html">Home</a></h3>
+<br>
+<br>
+<a href="${pageContext.request.contextPath}/edit_meal.jsp" >Add meal</a>
+<br>
+<br>
 <table border = "1px" cellpadding="3px" cellspacing="0">
     <tr>
         <td>Date</td>
@@ -29,8 +34,8 @@
             <td> ${f:formatLocalDateTime(meal.dateTime, 'dd.MM.yyyy HH:mm:ss')}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
-            <td><a href="">Update</a></td>
-            <td><a href="">Delete</a></td>
+            <td><a href="${pageContext.request.contextPath}/meals?action=update&id=${meal.id}">Update</a></td>
+            <td><a href="${pageContext.request.contextPath}/meals?action=delete">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
