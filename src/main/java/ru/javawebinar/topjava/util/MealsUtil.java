@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
     public static final int CALORIES_PER_DAY = 2000;
+    public static AtomicLong count = new AtomicLong(0);
 
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM, dd, yyyy HH:mm:ss", Locale.US);
+    public static  void increment() {
+        count.incrementAndGet();
+    }
 
-    public static void main(String[] args) {
-//        List<MealTo> mealsTo = filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-//        mealsTo.forEach(System.out::println);
+    public static void decrement() {
+        count.decrementAndGet();
     }
 
     public static List<MealTo> mealToConverter(List<Meal> meals) {

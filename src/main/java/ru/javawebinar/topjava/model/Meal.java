@@ -4,37 +4,22 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Meal {
-
-    private final LocalDateTime dateTime;
-
-    private final String description;
-
-    private final int calories;
+public class Meal extends BaseMeal{
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
-        this.dateTime = dateTime;
-        this.description = description;
-        this.calories = calories;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getCalories() {
-        return calories;
+        super(dateTime, description, calories);
     }
 
     public LocalDate getDate() {
-        return dateTime.toLocalDate();
+        return super.getDateTime().toLocalDate();
     }
 
     public LocalTime getTime() {
-        return dateTime.toLocalTime();
+        return super.getDateTime().toLocalTime();
+    }
+
+    @Override
+    public String toString() {
+        return "Meal{}" + super.toString();
     }
 }
