@@ -10,7 +10,7 @@ public interface MealRepository {
 
     void delete(Long mealId);
 
-    void update(Meal meal);
+    void update(Long id, Meal meal);
 
     Meal getMealById(Long mealId);
 

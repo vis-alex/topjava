@@ -35,20 +35,28 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println(req.getParameter("date"));
-//        if("create".equals(req.getParameter("action"))) {
+        if ("edit".equals(req.getParameter("action"))) {
+            req.setAttribute("id", req.getParameter("id"));
+            req.setAttribute("date", req.getParameter("date"));
+            req.setAttribute("description", req.getParameter("description"));
+            req.setAttribute("calories", req.getParameter("calories"));
+            req.getRequestDispatcher("edit_meal.jsp").forward(req, resp);
+        } else if (req.getParameter("id") != null) {
+            Meal meal = new Meal(
+                    LocalDateTime.parse(req.getParameter("date")),
+                    req.getParameter("description"),
+                    Integer.parseInt(req.getParameter("calories"))
+                    );
+            mealRepository.update(Long.parseLong(req.getParameter("id")), meal);
+        } else {
+
             mealRepository.create(new Meal(
                     LocalDateTime.parse(req.getParameter("date")),
                     req.getParameter("description"),
                     Integer.parseInt(req.getParameter("calories"))
             ));
-//        }
-//        else if ("update".equals(req.getParameter("action"))) {
-//            mealRepository.update();
-//        }
+        }
 
-        List<MealTo> result = MealsUtil.mealToConverter(mealRepository.getAllMeals());
-        req.setAttribute("meals", result);
-        req.getRequestDispatcher("meals.jsp").forward(req, resp);
+        doGet(req, resp);
     }
 }

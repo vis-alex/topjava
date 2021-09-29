@@ -34,7 +34,10 @@
             <td> ${f:formatLocalDateTime(meal.dateTime, 'dd.MM.yyyy HH:mm:ss')}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
-            <td><a href="${pageContext.request.contextPath}/meals?action=update&id=${meal.id}">Update</a></td>
+            <td><a href=
+                "${pageContext.request.contextPath}/edit_meal.jsp?action=edit&id=${meal.id}&date=${meal.dateTime}
+                &description=${meal.description}&calories=${meal.calories}">
+             Update</a></td>
             <td><a href="${pageContext.request.contextPath}/meals?action=delete">Delete</a></td>
         </tr>
     </c:forEach>

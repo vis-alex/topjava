@@ -17,8 +17,8 @@ public class MealsUtil {
     public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMMM, dd, yyyy HH:mm:ss", Locale.US);
     public static AtomicLong count = new AtomicLong(0);
 
-    public static void increment() {
-        count.incrementAndGet();
+    public static Long increment() {
+        return count.incrementAndGet();
     }
 
     public static void decrement() {
@@ -44,7 +44,7 @@ public class MealsUtil {
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
 }

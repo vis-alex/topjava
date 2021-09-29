@@ -16,17 +16,17 @@
 <h2>Edit meal</h2>
 <br>
 <form method="post" action="meals">
-    <input type="hidden" name="id" value="">
+    <input type="hidden" name="id" value="${param.id}">
     <label for="date">DateTime : </label>
-    <input type="datetime-local" name="date" id="date">
+    <input type="datetime-local" name="date" id="date" placeholder="${param.date}">
     <br>
     <br>
     <label for="description">Description : </label>
-    <input type="text" name="description" id="description">
+    <input type="text" name="description" id="description" placeholder="${param.description}">
     <br>
     <br>
     <label for="calories">Calories : </label>
-    <input type="number" name="calories" id="calories">
+    <input type="number" name="calories" id="calories" placeholder="${param.calories}">
     <br>
     <br>
     <button type="submit">Save</button>

@@ -30,6 +30,14 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         mealMap.put(meal5.getId(), meal5);
         Meal meal6 = new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410);
         mealMap.put(meal6.getId(), meal6);
+
+        for (Long id : mealMap.keySet()) {
+            System.out.println(id);
+        }
+
+        for (Meal meal : mealMap.values()) {
+            System.out.println(meal.getId());
+        }
     }
 
     private InMemoryMealRepositoryImpl() {
@@ -57,14 +65,13 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public void update(Meal meal) {
-        Meal oldMeal = mealMap.get(meal.getId());
+    public void update(Long id, Meal meal) {
+        Meal oldMeal = mealMap.get(id);
 
         if (oldMeal != null) {
             oldMeal.setCalories(meal.getCalories());
             oldMeal.setDateTime(meal.getDateTime());
             oldMeal.setDescription(meal.getDescription());
-            oldMeal.setId(meal.getId());
         }
     }
 
