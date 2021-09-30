@@ -5,7 +5,6 @@ import ru.javawebinar.topjava.model.Meal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,14 +29,6 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         mealMap.put(meal5.getId(), meal5);
         Meal meal6 = new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410);
         mealMap.put(meal6.getId(), meal6);
-
-        for (Long id : mealMap.keySet()) {
-            System.out.println(id);
-        }
-
-        for (Meal meal : mealMap.values()) {
-            System.out.println(meal.getId());
-        }
     }
 
     private InMemoryMealRepositoryImpl() {

@@ -1,9 +1,7 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class BaseMeal {
 

@@ -38,7 +38,7 @@
                 "${pageContext.request.contextPath}/edit_meal.jsp?action=edit&id=${meal.id}&date=${meal.dateTime}
                 &description=${meal.description}&calories=${meal.calories}">
              Update</a></td>
-            <td><a href="${pageContext.request.contextPath}/meals?action=delete">Delete</a></td>
+            <td><a href="${pageContext.request.contextPath}/meals?action=delete&id=${meal.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

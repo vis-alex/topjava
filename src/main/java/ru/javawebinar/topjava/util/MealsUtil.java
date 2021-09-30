@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class MealsUtil {
     public static final int CALORIES_PER_DAY = 2000;
-    public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMMM, dd, yyyy HH:mm:ss", Locale.US);
     public static AtomicLong count = new AtomicLong(0);
 
     public static Long increment() {

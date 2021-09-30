@@ -25,6 +25,10 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if ("delete".equals(req.getParameter("action"))) {
+            mealRepository.delete(Long.parseLong(req.getParameter("id")));
+        }
+
         log.debug("forward to meals");
 
         List<MealTo> result = MealsUtil.mealToConverter(mealRepository.getAllMeals());
@@ -36,12 +40,17 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if ("edit".equals(req.getParameter("action"))) {
+            log.debug("forward to edit_meals.jsp");
+
             req.setAttribute("id", req.getParameter("id"));
-            req.setAttribute("date", req.getParameter("date"));
+            req.setAttribute("date",req.getParameter("date"));
             req.setAttribute("description", req.getParameter("description"));
             req.setAttribute("calories", req.getParameter("calories"));
             req.getRequestDispatcher("edit_meal.jsp").forward(req, resp);
-        } else if (req.getParameter("id") != null) {
+        } else if (!req.getParameter("id").equals("")) {
+            log.debug("update meal");
+            System.out.println("OUR DATE IS" + req.getParameter("date"));
+
             Meal meal = new Meal(
                     LocalDateTime.parse(req.getParameter("date")),
                     req.getParameter("description"),
@@ -49,7 +58,7 @@ public class MealServlet extends HttpServlet {
                     );
             mealRepository.update(Long.parseLong(req.getParameter("id")), meal);
         } else {
-
+            log.debug("create meal");
             mealRepository.create(new Meal(
                     LocalDateTime.parse(req.getParameter("date")),
                     req.getParameter("description"),
