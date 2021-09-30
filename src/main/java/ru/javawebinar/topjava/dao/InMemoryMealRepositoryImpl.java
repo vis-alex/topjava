@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryMealRepositoryImpl implements MealRepository {
     private static  MealRepository mealRepository;
+
+    public static AtomicLong count = new AtomicLong(0);
 
     private final Map<Long, Meal> mealMap = new ConcurrentHashMap<>();
 

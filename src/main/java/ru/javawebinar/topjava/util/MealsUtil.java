@@ -14,18 +14,9 @@ import java.util.stream.Collectors;
 
 public class MealsUtil {
     public static final int CALORIES_PER_DAY = 2000;
-    public static AtomicLong count = new AtomicLong(0);
-
-    public static Long increment() {
-        return count.incrementAndGet();
-    }
-
-    public static void decrement() {
-        count.decrementAndGet();
-    }
 
     public static List<MealTo> mealToConverter(List<Meal> meals) {
-        return filteredByStreams(meals, null, null);
+        return filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX);
     }
 
     public static List<MealTo> filteredByStreams(List<Meal> meals, LocalTime startTime, LocalTime endTime) {
@@ -36,8 +27,7 @@ public class MealsUtil {
                 );
 
         return meals.stream()
-                .filter(meal ->
-                        (endTime == null && startTime == null) || TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
+                .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > CALORIES_PER_DAY))
                 .collect(Collectors.toList());
     }

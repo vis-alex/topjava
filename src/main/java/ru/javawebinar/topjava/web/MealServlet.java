@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.web;
 import org.slf4j.Logger;
-import ru.javawebinar.topjava.Main;
 import ru.javawebinar.topjava.dao.InMemoryMealRepositoryImpl;
 import ru.javawebinar.topjava.dao.MealRepository;
 import ru.javawebinar.topjava.model.Meal;
@@ -49,7 +48,6 @@ public class MealServlet extends HttpServlet {
             req.getRequestDispatcher("edit_meal.jsp").forward(req, resp);
         } else if (!req.getParameter("id").equals("")) {
             log.debug("update meal");
-            System.out.println("OUR DATE IS" + req.getParameter("date"));
 
             Meal meal = new Meal(
                     LocalDateTime.parse(req.getParameter("date")),
