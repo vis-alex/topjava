@@ -74,7 +74,7 @@ public class MealServlet extends HttpServlet {
                         LocalTime.MAX : LocalTime.parse(request.getParameter("to_time"));
 
                 request.setAttribute("meals", MealsUtil.getFilteredTos(mealRestController.getAll(SecurityUtil.authUserId()),
-                        MealsUtil.DEFAULT_CALORIES_PER_DAY, from_date, to_date, from_time, to_time));
+                        SecurityUtil.authUserCaloriesPerDay(), from_date, to_date, from_time, to_time));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
 
             case "delete":
@@ -95,7 +95,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals",
-                        MealsUtil.getTos(mealRestController.getAll(SecurityUtil.authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
+                        MealsUtil.getTos(mealRestController.getAll(SecurityUtil.authUserId()), SecurityUtil.authUserCaloriesPerDay()));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }

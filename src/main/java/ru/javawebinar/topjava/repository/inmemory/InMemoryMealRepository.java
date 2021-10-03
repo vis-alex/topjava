@@ -6,6 +6,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,6 @@ public class InMemoryMealRepository implements MealRepository {
         for (Meal meal : MealsUtil.meals) {
             save(SecurityUtil.authUserId(), meal);
         }
-
-        System.out.println(repository);
     }
 
     @Override
@@ -56,6 +55,9 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
+        if (repository.get(userId) == null) {
+            return new ArrayList<>();
+        }
         return repository.get(userId).values().stream()
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
                 .collect(Collectors.toList());
