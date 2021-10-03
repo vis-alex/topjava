@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
@@ -15,8 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class MealServlet extends HttpServlet {
@@ -50,7 +55,6 @@ public class MealServlet extends HttpServlet {
             mealRestController.update(SecurityUtil.authUserId(), meal, meal.getId());
         }
 
-
         response.sendRedirect("meals");
     }
 
@@ -59,6 +63,20 @@ public class MealServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
+            case "filter" :
+                LocalDate from_date = request.getParameter("from_date").isEmpty() ?
+                        LocalDate.MIN : LocalDate.parse(request.getParameter("from_date"));
+                LocalDate to_date = request.getParameter("to_date").isEmpty() ?
+                        LocalDate.MAX : LocalDate.parse(request.getParameter("to_date"));
+                LocalTime from_time = request.getParameter("from_time").isEmpty() ?
+                        LocalTime.MIN : LocalTime.parse(request.getParameter("from_time"));
+                LocalTime to_time = request.getParameter("to_time").isEmpty() ?
+                        LocalTime.MAX : LocalTime.parse(request.getParameter("to_time"));
+
+                request.setAttribute("meals", MealsUtil.getFilteredTos(mealRestController.getAll(SecurityUtil.authUserId()),
+                        MealsUtil.DEFAULT_CALORIES_PER_DAY, from_date, to_date, from_time, to_time));
+                request.getRequestDispatcher("/meals.jsp").forward(request, response);
+
             case "delete":
                 int id = getId(request);
                 log.info("Delete {}", id);

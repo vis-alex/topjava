@@ -21,6 +21,27 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+
+    <form action="meals" method="get">
+        <input type="hidden" name="action" value="filter">
+
+        <label for="from_date">From date (include)</label>
+        <input type="date" name="from_date" id="from_date">
+
+        <label for="to_date">To date (include)</label>
+        <input type="date" name="to_date" id="to_date">
+
+        <label for="from_time">From time (include)</label>
+        <input type="time" name="from_time" id="from_time">
+
+        <label for="to_time">To time (exclude)</label>
+        <input type="time" name="to_time" id="to_time">
+
+        <br>
+        <button>Отменить</button>
+        <button type="submit">Отфильтровать</button>
+    </form>
+
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
