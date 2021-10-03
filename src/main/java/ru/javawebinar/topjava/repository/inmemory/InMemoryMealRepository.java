@@ -22,6 +22,8 @@ public class InMemoryMealRepository implements MealRepository {
         for (Meal meal : MealsUtil.meals) {
             save(SecurityUtil.authUserId(), meal);
         }
+
+        System.out.println(repository);
     }
 
     @Override
@@ -30,11 +32,9 @@ public class InMemoryMealRepository implements MealRepository {
 
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
-            mealMap.put(meal.getId(), meal);
-            repository.put(userId, mealMap);
-        } else if (mealMap.get(meal.getId()) == null){
-            return null;
         }
+        mealMap.put(meal.getId(), meal);
+        repository.put(userId, mealMap);
         return meal;
     }
 

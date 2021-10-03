@@ -5,9 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
-import ru.javawebinar.topjava.to.MealTo;
-import ru.javawebinar.topjava.util.MealsUtil;
-import ru.javawebinar.topjava.web.SecurityUtil;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
 @Controller
 public class MealRestController {
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final MealService service;
@@ -24,31 +22,31 @@ public class MealRestController {
         this.service = service;
     }
 
-    public List<MealTo> getAll() {
+    public List<Meal> getAll(int userId) {
         log.info("getAll");
-        return MealsUtil.getTos(service.getAll(SecurityUtil.authUserId()), SecurityUtil.authUserCaloriesPerDay());
+        return service.getAll(userId);
     }
 
-    public Meal get(int id) {
+    public Meal get(int userId, int id) {
         log.info("get {}", id);
-        return service.get(SecurityUtil.authUserId(), id);
+        return service.get(userId, id);
     }
 
-    public Meal create(Meal meal) {
+    public Meal create(int userId, Meal meal) {
         log.info("create {}", meal);
         checkNew(meal);
-        return service.create(SecurityUtil.authUserId(), meal);
+        return service.create(userId, meal);
     }
 
-    public void delete(int id) {
+    public void delete(int userId, int id) {
         log.info("delete {}", id);
-        service.delete(SecurityUtil.authUserId(), id);
+        service.delete(userId, id);
     }
 
-    public void update(Meal meal, int id) {
+    public void update(int userId, Meal meal, int id) {
         log.info("update {} with id={}", meal, id);
         assureIdConsistent(meal, id);
-        service.update(SecurityUtil.authUserId(), meal, id);
+        service.update(userId, meal, id);
     }
 
 }
