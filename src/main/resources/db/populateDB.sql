@@ -13,4 +13,4 @@ VALUES ('USER', 100000),
 
 INSERT INTO meals (date_time, description, calories, user_id)
 VALUES ('1991-07-01 13:12:57', 'Hola', 1001, 100000),
-       (now(), 'Its now', 501, 100001);
+       ('2008-07-02 03:12:21', 'Its later', 501, 100001);
