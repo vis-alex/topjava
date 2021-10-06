@@ -3,6 +3,7 @@ package ru.javawebinar.topjava;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -14,10 +15,14 @@ public class MealTestData {
     public static final int ADMIN_ID = START_SEQ + 1;
     public static final int MEAL_ID1 = START_SEQ + 2;
     public static final int MEAL_ID2 = START_SEQ + 3;
+    public static final int MEAL_ID3 = START_SEQ + 4;
     public static final int NOT_FOUND = 10;
+    public static final LocalDate START_DATE = LocalDate.parse("1990-01-01");
+    public static final LocalDate END_DATE = LocalDate.parse("2010-02-02");
 
     public static final Meal meal1 = new Meal(MEAL_ID1, LocalDateTime.parse("1991-07-01T13:12:57"), "Hola", 1001);
     public static final Meal meal2 = new Meal(MEAL_ID2, LocalDateTime.parse("2008-07-02T03:12:21"), "Its later", 501);
+    public static final Meal meal3 = new Meal(MEAL_ID3, LocalDateTime.parse("1992-07-02T03:12:21"), "Third", 201);
 
     public static void assertMatch(Meal actual, Meal expected) {
         assertThat(actual).isEqualToComparingFieldByField(expected);
