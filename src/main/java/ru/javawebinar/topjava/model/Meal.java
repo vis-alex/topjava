@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.model;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,9 +12,6 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query =
                 "DELETE FROM Meal m " +
-                        "WHERE m.id=:id AND m.user.id=:user_id"),
-        @NamedQuery(name = Meal.GET, query =
-                "SELECT m FROM Meal m " +
                         "WHERE m.id=:id AND m.user.id=:user_id"),
         @NamedQuery(name = Meal.ALL_SORTED, query =
                 "SELECT m FROM Meal m " +
@@ -29,7 +27,6 @@ import java.time.LocalTime;
 public class Meal extends AbstractBaseEntity {
 
     public static final String DELETE = "Meal.delete";
-    public static final String GET = "Meal.get";
     public static final String GET_BETWEEN_DATES = "Meal.getBetweenHalfOpen";
     public static final String ALL_SORTED = "Meal.getAllSorted";
 
@@ -38,15 +35,16 @@ public class Meal extends AbstractBaseEntity {
     private LocalDateTime dateTime;
 
     @Column(name = "description")
+    @NotBlank
     private String description;
 
     @Column(name = "calories")
-    @NotNull
     @Range(min = 10, max = 5000)
     private int calories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @NotNull
     private User user;
 
     public Meal() {
