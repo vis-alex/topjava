@@ -1,12 +1,13 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+
 public class Meal extends AbstractBaseEntity {
+
     private LocalDateTime dateTime;
 
     private String description;
