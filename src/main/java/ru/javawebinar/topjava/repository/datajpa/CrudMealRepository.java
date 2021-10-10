@@ -15,12 +15,12 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
 
     Meal findByIdAndUser_id(int id, int userId);
 
+    @Transactional
     @Modifying
     int deleteByIdAndUser_id(int id, int userId);
 
     List<Meal> findAllByUser_idOrderByDateTimeDesc(int userId);
 
-    @Modifying
     @Query("SELECT m FROM Meal m \n" +
             "WHERE m.user.id=:userId AND m.dateTime >= :start AND m.dateTime < :end ORDER BY m.dateTime DESC")
     List<Meal> getBetweenDates(@Param("start") LocalDateTime startDateTime,
