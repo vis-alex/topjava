@@ -15,6 +15,7 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
 
     Meal findByIdAndUser_id(int id, int userId);
 
+    @Modifying
     int deleteByIdAndUser_id(int id, int userId);
 
     List<Meal> findAllByUser_idOrderByDateTimeDesc(int userId);
