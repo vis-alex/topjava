@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.repository.jdbc;
+package ru.javawebinar.topjava.repository.jdbc.meal_jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Profile("hsqldb")
-public class HsqlDbJdbcMealRepository extends JdbcMealRepository{
+public class HsqlDbJdbcMealRepository extends JdbcMealRepository {
 
     @Autowired
     public HsqlDbJdbcMealRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

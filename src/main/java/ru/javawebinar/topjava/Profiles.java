@@ -13,7 +13,7 @@ public class Profiles {
 
     public static final String REPOSITORY_IMPLEMENTATION = JPA;
 
-    public static final String ACTIVE_DB = HSQL_DB;
+    public static final String ACTIVE_DB = POSTGRES_DB;
     //  Get DB profile depending of DB driver in classpath
     public static String getActiveDbProfile() {
         if (ClassUtils.isPresent("org.postgresql.Driver", null)) {
