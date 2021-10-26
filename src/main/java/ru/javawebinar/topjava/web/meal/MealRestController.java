@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -57,12 +60,17 @@ public class MealRestController extends AbstractMealController {
     }
 
     @GetMapping("/filter")
-    public List<MealTo> getBetweenFilter(@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-                                   @RequestParam(value = "startTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-                                   @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-                                   @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
+    public List<MealTo> getBetweenFilter(@RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                   @RequestParam(value = "startTime", required = false) LocalTime startTime,
+                                   @RequestParam(value = "endDate", required = false) LocalDate endDate,
+                                   @RequestParam(value = "endTime", required = false) LocalTime endTime) {
 
-        return super.getBetween(startDate.toLocalDate(), startTime.toLocalTime(), endDate.toLocalDate(), endTime.toLocalTime());
+        return super.getBetween(
+                startDate == null ? DateTimeUtil.MIN_DATE.toLocalDate() : startDate,
+                startTime == null ? LocalTime.MIN : startTime,
+                endDate == null ? DateTimeUtil.MAX_DATE.toLocalDate() : endDate,
+                endTime == null ? LocalTime.MAX : endTime);
+
     }
 
 }
