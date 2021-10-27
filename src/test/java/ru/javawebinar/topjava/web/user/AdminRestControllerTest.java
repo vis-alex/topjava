@@ -5,12 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.UserTestData;
+import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -83,5 +88,19 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentJson(admin, user));
+    }
+
+    @Test
+    void getWithMeals() throws Exception{
+        ResultActions action = perform(MockMvcRequestBuilders.get("/rest/admin/users/with-meals/100001"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentJson(admin));
+
+        User user = MATCHER.readFromJson(action);
+
+        List<Meal> meals = Arrays.asList(MealTestData.adminMeal2, MealTestData.adminMeal1);
+
+        MealTestData.MATCHER.assertMatch(user.getMeals(), meals);
     }
 }
