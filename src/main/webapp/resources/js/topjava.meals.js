@@ -13,7 +13,7 @@ $(function () {
             "info": true,
             "columns": [
                 {
-                    "data": "dateTime"
+                    "data": "date_time"
                 },
                 {
                     "data": "description"
