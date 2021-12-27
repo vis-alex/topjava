@@ -30,7 +30,7 @@ $(function () {
                 {
                     "data": "dateTime",
                     "render": function (date, type, row) {
-                            return date.toString();
+                            return date.toString().replaceAll("T", "");
                     }
                 },
                 {
