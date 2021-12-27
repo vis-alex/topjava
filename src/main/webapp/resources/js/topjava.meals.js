@@ -34,17 +34,10 @@ $(function () {
                     }
                 },
                 {
-                    "data": "description",
-                    "render": function (data, type, row) {
-                        return data;
-                    }
-
+                    "data": "description"
                 },
                 {
-                    "data": "calories",
-                    "render": function (data, type, row) {
-                        return data;
-                    }
+                    "data": "calories"
                 },
                 {
                     "orderable": false,
@@ -62,7 +55,15 @@ $(function () {
                     0,
                     "desc"
                 ]
-            ]
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                // debugger;
+                if (data.excess) {
+                    $(row).css( 'color', 'red' );
+                } else {
+                    $(row).css( 'color', 'green' );
+                }
+            }
         })
     );
 });
