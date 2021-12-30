@@ -35,7 +35,7 @@ class RootControllerTest extends AbstractControllerTest {
         perform(get("/meals"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
-                .andExpect(forwardedUrl("http://localhost/login"));
+                .andExpect(redirectedUrl("http://localhost/login"));
 
     }
 }
