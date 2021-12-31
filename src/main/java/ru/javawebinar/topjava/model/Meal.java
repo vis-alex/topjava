@@ -51,6 +51,7 @@ public class Meal extends AbstractBaseEntity implements Serializable {
 
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 5000)
+    @NotNull
     private Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
