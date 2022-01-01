@@ -66,57 +66,59 @@ $(function () {
             }
         })
     );
+
+
+    let startDate = $('#startDate');
+    let endDate = $('#endDate');
+
+    startDate.datetimepicker({
+        format: 'Y/m/d',
+        formatDate: 'Y/m/d',
+        onShow: function (ct) {
+            this.setOptions({
+                maxDate: endDate.val() ? endDate.val() : false
+            })
+        },
+        timepicker: false
+    });
+
+    endDate.datetimepicker({
+        format: 'Y/m/d',
+        formatDate: 'Y/m/d',
+        onShow: function (ct) {
+            this.setOptions({
+                minDate: startDate.val() ? startDate.val() : false
+            })
+        },
+        timepicker: false
+    });
+
+    let startTime= $('#startTime');
+    let endTime = $('#endTime');
+
+    startTime.datetimepicker({
+        format: 'H:i',
+        onShow: function (ct) {
+            this.setOptions({
+                maxTime: endTime.val() ? endTime.val() : false
+            })
+        },
+        timepicker: false
+    });
+
+    endTime.datetimepicker({
+        format:'H:i',
+        onShow:function( ct ){
+            this.setOptions({
+                minTime : startTime.val() ? startTime.val() : false
+            })
+        },
+        timepicker:false
+    });
+
+    $('#dateTime').datetimepicker({
+        format : 'Y-m-d H:i'
+    });
+
 });
 
-
-let startDate = $('#startDate');
-let endDate = $('#endDate');
-
-startDate.datetimepicker({
-    format: 'Y/m/d',
-    formatDate: 'Y/m/d',
-    onShow: function (ct) {
-        this.setOptions({
-            maxDate: endDate.val() ? endDate.val() : false
-        })
-    },
-    timepicker: false
-});
-
-endDate.datetimepicker({
-    format: 'Y/m/d',
-    formatDate: 'Y/m/d',
-    onShow: function (ct) {
-        this.setOptions({
-            minDate: startDate.val() ? startDate.val() : false
-        })
-    },
-    timepicker: false
-});
-
-let startTime= $('#startTime');
-let endTime = $('#endTime');
-
-startTime.datetimepicker({
-    format: 'H:i',
-    onShow: function (ct) {
-        this.setOptions({
-            maxDate: endTime.val() ? endTime.val() : false
-        })
-    },
-    timepicker: false
-});
-
-endTime.datetimepicker({
-    format:'H:i',
-    onShow:function( ct ){
-        this.setOptions({
-            minDate : startTime.val() ? startTime.val() : false
-        })
-    },
-    timepicker:false
-});
-
-$('#dateTime').datetimepicker({
-    format : 'H:i'
-});
