@@ -74,6 +74,7 @@ $(function(){
 
    startDate.datetimepicker({
         format:'Y/m/d',
+        formatDate:'Y/m/d',
         onShow:function( ct ){
             this.setOptions({
                 maxDate : endDate.val() ? endDate.val() : false
@@ -84,6 +85,7 @@ $(function(){
 
     endDate.datetimepicker({
         format:'Y/m/d',
+        formatDate:'Y/m/d',
         onShow:function( ct ){
             this.setOptions({
                 minDate : startDate.val() ? startDate.val() : false
