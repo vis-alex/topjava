@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.util.DateTimeUtil;
+import ru.javawebinar.topjava.util.validation.NoHtml;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -45,6 +46,7 @@ public class Meal extends AbstractBaseEntity {
     @Column(name = "description", nullable = false)
     @NotBlank
     @Size(min = 2, max = 120)
+    @NoHtml(groups = {View.Web.class})
     private String description;
 
     @Column(name = "calories", nullable = false)
