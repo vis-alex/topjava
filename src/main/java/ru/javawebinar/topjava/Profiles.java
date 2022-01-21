@@ -9,7 +9,8 @@ public class Profiles {
             DATAJPA = "datajpa",
 
             POSTGRES_DB = "postgres",
-            HSQL_DB = "hsqldb";
+            HSQL_DB = "hsqldb",
+            HEROKU = "heroku";
 
     public static final String REPOSITORY_IMPLEMENTATION = DATAJPA;
 
